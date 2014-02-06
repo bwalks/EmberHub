@@ -13,12 +13,20 @@
 </head>
 <body>
   <script type="text/x-handlebars">
-    <h2>EmberHub</h2>
-    {{input valueBinding="newUser" action="createNewUser"}}
+  <h2>Emberhub</h2>
+  {{outlet}}
+  </script>
+  <script type="text/x-handlebars" id="users">
+    {{input valueBinding="newUser" action="createUser"}}
+    <p>
+    {{#each}}
+      {{#link-to 'users.user' this}}<img {{bind-attr src=avatar_url }} />{{/link-to}}
+    {{/each}}
+    </p>
     {{outlet}}
   </script>
 
-    <script type="text/x-handlebars" id="user">
+    <script type="text/x-handlebars" id="users/user">
     <h2>{{name}}</h2>
     <img {{bind-attr src=avatar_url }} />
   </script>

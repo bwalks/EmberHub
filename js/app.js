@@ -1,7 +1,9 @@
 App = Ember.Application.create();
 
 App.Router.map(function() {
-  this.route('user', {path: '/user/:user_id'});
+	this.resource('users', {path: '/'}, function(){
+  		this.route('user', {path: '/user/:user_id'});
+  	});
 });
 
 App.Router.reopen({
@@ -16,28 +18,36 @@ App.User = DS.Model.extend({
 			});
 
 
-DS.RESTAdapter.reopen({
-  host: 'https://api.github.com'
-});
-
 App.Store = DS.Store.extend({
-    adapter: DS.RESTAdapter.extend()
+    adapter: DS.LSAdapter
 });
 
-App.UserSerializer = DS.RESTSerializer.extend({
-    // Override normalize method in all models
+App.UsersController = Ember.ArrayController.extend({
+	actions: { 
+		'createUser' : function(){
+						  	var name = this.get('newUser');
+						  	if(!name){
+						  		return;
+						  	}
 
-    extractSingle: function (store, primaryType, payload) {
-    	var primaryTypeName = primaryType.typeKey;
-    	var typeName = primaryTypeName,
-        type = store.modelFor(typeName);
-        var data = {};
-        data[typeName] = payload;
-    return this._super.call(this, store, primaryType, data);
-},
+						  	var that = this;
+
+						  	Ember.$.getJSON('https://api.github.com/users/' + name).then(function(data){
+						  		var user = that.store.createRecord('user', data);
+						  		user.save();
+						  		that.set('newUser', '');
+						  	});
+						}
+	}
 });
 
-App.UserRoute = Ember.Route.extend({
+App.UsersRoute = Ember.Route.extend({
+    model: function(user) {
+    	return this.store.find('user');	
+  	}
+});
+
+App.UsersUserRoute = Ember.Route.extend({
     model: function(user) {
     	return this.store.find('user', user.user_id);	
   	}
