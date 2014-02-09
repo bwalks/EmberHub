@@ -5,39 +5,57 @@
 <title>Ember Starter Kit</title>
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
-  <style>
-    .selected {
-        background: black;
-    }
-  </style>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+
+  <script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+  <script src="vendor/handlebars-1.1.2.js"></script>
+  <script src="vendor/ember-1.3.1.js"></script>
+  <script src="vendor/ember-data-beta-1.js"></script>
+  <script src="vendor/ember-data-localstorage.js"></script>
+  <script src="dist/emberhub.js"></script>
 </head>
 <body>
   <script type="text/x-handlebars">
-  <h2>Emberhub</h2>
-  {{outlet}}
+  <div class="container">
+    <header class="text-center">
+      <div class="row">
+        {{#link-to 'users'}}<img src="images/logo.png" />{{/link-to}}
+      </div>
+      <div class="row">
+        {{input valueBinding="newUser" action="createUser" placeholder="Add GitHub user"}}
+      </div>
+    </header>
+  
+    {{outlet}}
+  </div>
   </script>
-  <script type="text/x-handlebars" id="users">
-    {{input valueBinding="newUser" action="createUser"}}
-    <p>
-    {{#each}}
-      {{#link-to 'users.user' this}}<img {{bind-attr src=avatar_url }} />{{/link-to}}
-    {{/each}}
-    </p>
+
+  <script type="text/x-handlebars" id="users/index">
+    <div class="row text-center" id="users">
+      {{#each}}
+        {{#link-to 'users.user' this}}<img class="img-circle avatar" {{bind-attr src=avatar_url }} />{{/link-to}}
+      {{/each}}
+    </div>
     {{outlet}}
   </script>
 
     <script type="text/x-handlebars" id="users/user">
-    <h2>{{name}}</h2>
-    <img {{bind-attr src=avatar_url }} />
-  </script>
+    <div class="row">
+      <div class="col-md-1">
+        <img class="img-circle avatar" {{bind-attr src=avatar_url }} /> 
+      </div>
+      <div class="col-md-11">
+        <h2>{{name}}</h2>
+      </div>
+    </div>
 
-  <script src="js/libs/jquery-1.10.2.js"></script>
-  <script src="js/libs/handlebars-1.1.2.js"></script>
-  <script src="js/libs/ember-1.3.1.js"></script>
-  <script src="js/libs/ember-data-beta-1.js"></script>
-  <script src="js/libs/ember-data-localstorage.js"></script>
-  <script src="js/app.js"></script>
-  <!-- to activate the test runner, add the "?test" query string parameter -->
-  <script src="tests/runner.js"></script>
+    <div class="row">
+      <h3>Repositories</h3>
+      <p>bootstrap</p>
+      <p>rails</p>
+    </div>
+  </script>
 </body>
 </html>

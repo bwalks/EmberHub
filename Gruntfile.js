@@ -6,7 +6,7 @@ module.exports = function(grunt) {
     			separator: '\n'
   			},
   			dist: {
-    			src: ['js/*.js'],
+    			src: ['js/**/*.js'],
     		 dest: 'dist/<%= pkg.name %>.js'
   			}
 		}
@@ -14,4 +14,4 @@ module.exports = function(grunt) {
 
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.registerTask('default', ['concat']);
-};
+}; 
