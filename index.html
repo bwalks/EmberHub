@@ -25,6 +25,7 @@
       </div>
       <div class="row">
         {{input valueBinding="newUser" action="createUser" placeholder="Add GitHub user"}}
+        <button {{action "deleteUsers"}}>Delete All</button>
       </div>
     </header>
   
@@ -52,9 +53,14 @@
     </div>
 
     <div class="row">
-      <h3>Repositories</h3>
-      <p>bootstrap</p>
-      <p>rails</p>
+    <h3>Repositories</h3>
+      {{#each repos}}
+        <p>
+         <a {{bind-attr href="html_url"}}>{{full_name}}</a>
+        </p>
+        {{else}}
+          <p>No repos loaded</p>
+      {{/each}}
     </div>
   </script>
 </body>
