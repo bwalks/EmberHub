@@ -20,7 +20,6 @@ DS.JSONSerializer.reopen({
 
         var relationshipType = DS.RelationshipChange.determineRelationshipType(
                 record.constructor, relationship);
-        console.log("Record: " + record);
         if (relationshipType === 'manyToNone'
                 || relationshipType === 'manyToMany'
                 || relationshipType === 'manyToOne') {
@@ -75,7 +74,6 @@ App.ApplicationController = Ember.ArrayController.extend({
 App.UsersController = Ember.ArrayController.extend({
 	sortProperties: ["id"]
 })
-
 App.Repo = DS.Model.extend({
     	   		full_name: DS.attr('string'),
     			html_url: DS.attr('string'),
