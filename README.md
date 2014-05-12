@@ -11,4 +11,4 @@ npm install
 grunt
 ```
 
-This will build the app. Start the app in a web server. This only uses the local storage in the browser, and interacts directly with the GitHub API.
+This will build the app and start a static web server. This only uses the local storage in the browser, and interacts directly with the GitHub API.
