@@ -24,4 +24,5 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-nodestatic')
 	grunt.registerTask('default', ['concat', 'nodestatic:server']);
+	grunt.registerTask('serve', ['default', 'nodestatic:server']);
 }; 
