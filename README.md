@@ -1,7 +1,6 @@
-=======
+
 EmberHub
 ========
-
 [![Build Status](https://travis-ci.org/bwalks/EmberHub.svg?branch=master)](https://travis-ci.org/bwalks/EmberHub)
 
 Simple Ember.js project that adds GitHub user account to see user's repositories
